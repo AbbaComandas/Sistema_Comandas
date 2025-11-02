@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Registro - Hotel Abba{% endblock %}
+
+{% block content %}
+<h2>Registro de nuevo usuario</h2>
+
+<form method="post">
+    {% csrf_token %}
+    <div class="form-registro">
+        {{ form.non_field_errors }}
+        {% for field in form %}
+            <div class="campo">
+                <label>{{ field.label }}</label><br>
+                {{ field }}
+                {% if field.errors %}
+                    <p class="error">{{ field.errors|striptags }}</p>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+
+    <button type="submit">Registrarme</button>
+</form>
+
+{% for message in messages %}
+<p class="mensaje">{{ message }}</p>
+{% endfor %}
+
+<p>¿Ya tienes cuenta? <a href="{% url 'login' %}">Inicia sesión</a></p>
+{% endblock %}

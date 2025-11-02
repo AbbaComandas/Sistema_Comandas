@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}{{ titulo }}{% endblock %}
+{% block content %}
+  <h2>{{ titulo }}</h2>
+  <p>{{ mensaje }}</p>
+
+  {% if rol == "garzon" %}
+    <button>Ver pedidos</button>
+  {% elif rol == "cocina" %}
+    <button>Órdenes pendientes</button>
+  {% elif rol == "gerencia" %}
+    <button>Ver reportes</button>
+  {% else %}
+    <p>Selecciona una opción del menú.</p>
+  {% endif %}
+{% endblock %}
