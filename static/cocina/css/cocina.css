@@ -1,123 +1,109 @@
-/* Contenedor principal */
-.panel-cocina {
-    text-align: center;
-    padding: 20px;
-}
-
-/* Título principal */
+/* cocina.css - SOLO ESTILOS DE CONTENIDO, NO LAYOUT */
 .panel-cocina h1 {
-    font-size: 2rem;
+    font-size: 2.5rem;
     color: #2c3e50;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
+    text-align: center;
 }
 
-/* Subtexto */
-.panel-cocina p {
-    color: #555;
-    margin-bottom: 25px;
+.empty {
+    text-align: center;
+    padding: 60px 20px;
+    color: #777;
+    font-size: 1.3rem;
 }
 
-/* Contenedor de tarjetas responsivo */
-.comandas-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 20px;
-    justify-content: center;
-}
-
-/* Tarjeta individual */
-.comanda-card {
-    background: #ffffff;
-    border-radius: 14px;
-    padding: 16px 18px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
-    text-align: left;
-    position: relative;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-.comanda-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
-}
-
-/* Cabecera */
+/* Estilos básicos para el contenido de las tarjetas */
 .comanda-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
 }
+
 .num-orden {
     font-weight: 700;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     color: #0b8a3e;
 }
+
 .timer {
     font-size: 0.95rem;
     color: #555;
 }
 
-/* Lista de items */
 .items-list {
-    margin-top: 8px;
+    margin-top: 12px;
     border-top: 1px solid #eee;
     border-bottom: 1px solid #eee;
-    padding: 8px 0;
+    padding: 10px 0;
 }
+
 .item-row {
     display: flex;
     justify-content: space-between;
-    padding: 6px 0;
+    padding: 8px 0;
 }
+
 .item-nombre {
     font-weight: 600;
     color: #333;
-}
-.item-cantidad {
-    color: #444;
-}
-.habitacion {
-    margin-top: 8px;
-    font-size: 0.95rem;
-    color: #333;
+    flex: 1;
 }
 
-/* Botones */
-.card-actions {
+.item-cantidad {
+    color: #444;
+    margin-left: 15px;
+    font-weight: bold;
+}
+
+.habitacion {
     margin-top: 12px;
+    font-size: 1rem;
+    color: #333;
+    font-weight: 500;
+}
+
+.card-actions {
+    margin-top: 15px;
     display: flex;
-    gap: 8px;
+    gap: 10px;
     justify-content: flex-end;
 }
+
 .btn-correcto, .btn-eliminar {
-    padding: 8px 12px;
+    padding: 10px 16px;
     border-radius: 8px;
     border: none;
     cursor: pointer;
     font-weight: 600;
+    font-size: 0.95rem;
 }
-.btn-correcto { background: #0b8a3e; color: white; }
-.btn-correcto:hover { background: #087933; }
-.btn-eliminar { background: #d62828; color: white; }
-.btn-eliminar:hover { background: #b71c1c; }
 
-/* Etiqueta LISTO */
+.btn-correcto { 
+    background: #0b8a3e; 
+    color: white; 
+}
+.btn-correcto:hover { 
+    background: #087933; 
+}
+
+.btn-eliminar { 
+    background: #d62828; 
+    color: white; 
+}
+.btn-eliminar:hover { 
+    background: #b71c1c; 
+}
+
 .estado-listo {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 15px;
+    right: 15px;
     background: #fff3cd;
-    padding: 5px 8px;
+    padding: 6px 10px;
     border-radius: 8px;
     font-weight: 700;
     color: #856404;
-    font-size: 0.85rem;
-}
-
-/* Mensaje vacío */
-.empty {
-    text-align: center;
-    padding: 40px 20px;
-    color: #777;
-    font-size: 1.1rem;
+    font-size: 0.9rem;
 }
