@@ -142,7 +142,12 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById('cancel-send').addEventListener('click', () => modal.style.display = 'none');
 
     document.getElementById('confirm-send').addEventListener('click', () => {
-    const payload = {items: Object.values(cart)};
+    const notas = document.getElementById("notas-cocina").value;
+
+    const payload = {
+        items: Object.values(cart),
+        notas_cocina: notas
+    };
     
     fetch(`/garzon/comanda/${comandaId}/enviar/`, {  // ← URL corregida
         method: 'POST',

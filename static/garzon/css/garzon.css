@@ -1,11 +1,26 @@
-.garzon-container {
-    max-width: 420px;
-    margin: 0 auto;
-    padding: 20px;
-    text-align: center;
-    font-family: 'Segoe UI', sans-serif;
+/* ====== CONFIG GENERAL RESPONSIVE ====== */
+* {
+    box-sizing: border-box;
 }
 
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* Contenedores principales */
+.garzon-container,
+.comanda-container,
+.clientes-container {
+    width: 100%;
+    max-width: 100%;
+    padding: 16px;
+    margin: 0 auto;
+    font-family: 'Segoe UI', sans-serif;
+    text-align: center;
+}
+
+/* Logo */
 .logo-container {
     display: flex;
     justify-content: center;
@@ -18,30 +33,35 @@
     border-radius: 12px;
 }
 
+.logo-right {
+    width: 60px;
+    height: auto;
+}
+
+/* Títulos */
 .titulo {
-    font-size: 22px;
+    font-size: 1.4rem;
     margin-bottom: 15px;
     color: #333;
 }
 
+/* ====== GRID DE HABITACIONES RESPONSIVE ====== */
 .habitaciones-grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(55px, 1fr));
     gap: 10px;
-    justify-items: center;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
 }
 
 .habitacion-card {
-    width: 60px;
-    height: 60px;
+    aspect-ratio: 1 / 1;
     background-color: #e0e0e0;
-    border-radius: 12px;
+    border-radius: 14px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 1.1rem;
     transition: 0.2s;
 }
 
@@ -50,305 +70,241 @@
     cursor: pointer;
 }
 
-.input-container {
-    margin-bottom: 20px;
+.habitacion-card.selected {
+    background: #bdbdbd;
+    box-shadow: 0 4px 8px rgba(0,0,0,.12);
 }
 
+/* Input */
 .input-container input {
-    width: 80%;
-    padding: 8px;
-    border-radius: 10px;
+    width: 100%;
+    max-width: 380px;
+    padding: 12px;
+    border-radius: 12px;
     border: 1px solid #ccc;
-    text-align: center;
+    font-size: 1rem;
 }
 
+/* Botones */
 .botones-container {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
 }
 
-.btn-accion, .btn-logout {
+.btn-accion {
     background-color: #444;
     color: white;
     border: none;
-    padding: 10px;
-    border-radius: 10px;
+    padding: 14px;
+    border-radius: 12px;
+    font-size: 1rem;
     cursor: pointer;
-    font-size: 16px;
+    text-decoration: none;
+    text-align: center;
 }
 
 .btn-logout {
     background-color: #c62828;
+    color: white;
+    border-radius: 12px;
 }
 
-.btn-accion:hover {
-    background-color: #666;
+/* ====== COMANDA ====== */
+.comanda-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.garzon-container, .comanda-container {
-    max-width: 420px;
-    margin: 0 auto;
-    padding: 16px;
-    text-align: center;
-    font-family: 'Segoe UI', sans-serif;
+.back-arrow {
+    font-size: 24px;
+    text-decoration: none;
+    color: #444;
 }
 
-.logo { width: 72px; height:72px; border-radius:10px; margin:0 auto; }
-
-.habitaciones-grid {
-    display:grid; grid-template-columns: repeat(5, 1fr); gap:10px; margin-bottom: 16px;
+.estado-comanda {
+    padding: 6px 12px;
+    font-weight: bold;
+    border-radius: 10px;
+    font-size: 0.9rem;
 }
 
-.habitacion-card {
-    background:#e6e6e6; height:58px; display:flex; align-items:center; justify-content:center;
-    border-radius:12px; font-weight:700; font-size:18px; cursor:pointer;
-    transition: transform .12s, background .12s;
+.estado-comanda.pendiente {
+    background: #ffd54f;
 }
-.habitacion-card:hover { transform: translateY(-3px); }
-.habitacion-card.selected { background:#bdbdbd; box-shadow: 0 4px 8px rgba(0,0,0,.08); }
 
-.input-container { margin:12px 0; }
+.estado-comanda.enviada {
+    background: #a5d6a7;
+}
 
-.botones-container { display:flex; flex-direction:column; gap:8px; }
-.btn-accion, .btn-logout { padding:10px; border-radius:10px; border:none; color:white; font-size:16px; cursor:pointer; }
-.btn-accion { background:#444; }
-.btn-logout { background:#c62828; text-decoration:none; display:inline-block; text-align:center; }
+/* Tabs */
+.tabs {
+    display: flex;
+    overflow-x: auto;
+    gap: 8px;
+    margin: 10px 0;
+    padding-bottom: 6px;
+}
 
-.comanda-header { display:flex; align-items:center; justify-content:space-between; gap:8px; }
-.back-arrow { text-decoration:none; font-size:22px; margin-right:8px; color:#333; }
-.estado-comanda { font-weight:700; padding:6px 10px; border-radius:8px; }
-.estado-comanda.pendiente { background: #ffd54f; }
-.estado-comanda.enviada { background: #a5d6a7; }
+/* ====== Categorías (tabs) ====== */
+.tab-btn {
+    padding: 12px 16px;
+    border-radius: 12px;
+    border: none;
+    background: #e0e0e0;            /* Gris por defecto */
+    color: #333;
+    font-size: 0.95rem;
+    font-weight: 600;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: inset 0 -2px 0 rgba(0,0,0,0.05);
+}
 
-.tabs { display:flex; gap:6px; justify-content:center; margin:12px 0; flex-wrap:wrap; }
-.tab-btn { padding:8px 12px; border-radius:8px; border:none; cursor:pointer; background:#eee; }
-.tab-btn.active { background:#444; color:white; }
+.tab-btn:hover {
+    background: #d5d5d5;
+}
 
-.items-list { display:flex; flex-direction:column; gap:12px; padding-bottom:80px; }
+.tab-btn.active {
+    background: #4CAF50;            /* Verde igual que los botones */
+    color: white;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    transform: translateY(-1px);
+}
+
+/* Menú items */
+.items-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-bottom: 120px;
+}
 
 .menu-item {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #fafafa;
-    border-radius: 14px;
-    margin: 8px 0;
-    padding: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    cursor: pointer;
-    transition: 0.2s ease;
+    background: #fafafa;
+    border-radius: 16px;
+    padding: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
 .plate-img {
-    width: 90px;
-    height: 90px;
-    object-fit: cover;
-    border-radius: 12px;
-}
-
-.item-info {
-    flex: 1;
-    margin-left: 10px;
-}
-
-.item-actions {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.plus-btn, .minus-btn {
-    width: 36px;
-    height: 36px;
-    border: none;
-    border-radius: 50%;
-    color: white;
-    font-size: 1.2em;
-    cursor: pointer;
-}
-
-.plus-btn {
-    background-color: #4CAF50;
-}
-
-.minus-btn {
-    background-color: #E53935;
-}
-
-#guardar-btn.active {
-    background-color: #43a047;
-    color: white;
-}
-
-.cantidad { font-size:14px; color:#333; }
-
-.bottom-bar {
-    position: fixed; left:50%; transform:translateX(-50%); bottom: 12px; width: 420px; max-width:95%;
-    display:flex; justify-content:space-between; align-items:center; gap:8px; padding:10px 12px; background:white; border-radius:12px;
-    box-shadow:0 6px 20px rgba(0,0,0,.12);
-}
-.bottom-actions { display:flex; gap:8px; }
-
-.modal {
-    position: fixed; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.4);
-}
-.modal-content { background:white; padding:16px; border-radius:12px; width:90%; max-width:420px; }
-.modal-actions { display:flex; gap:8px; justify-content:flex-end; margin-top:12px; }
-
-/* --- Estilo general de cada plato --- */
-.plato {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: #f9f9f9;
-    border-radius: 16px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    padding: 10px;
-    margin: 10px 0;
-    overflow: hidden;
-}
-
-/* --- Imagen del plato --- */
-.plato-img {
-    width: 90px;           /* 👈 controla el tamaño */
-    height: 90px;          /* 👈 proporción cuadrada */
-    object-fit: cover;     /* corta y centra la imagen sin deformarla */
-    border-radius: 12px;   /* bordes suaves */
-    flex-shrink: 0;        /* evita que se comprima al reducir ventana */
-}
-
-/* --- Información del plato --- */
-.plato-info {
-    flex: 1;
-    margin-left: 12px;
-}
-
-.plato-info h3 {
-    margin: 0;
-    font-size: 1.1em;
-    color: #333;
-}
-
-.plato-info p {
-    margin: 4px 0;
-    color: #666;
-    font-size: 0.9em;
-}
-
-/* --- Botones de agregar / quitar --- */
-.plato-acciones {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-}
-
-.btn-add, .btn-remove {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    border: none;
-    font-size: 1.2em;
-    color: white;
-    cursor: pointer;
-}
-
-.btn-add {
-    background-color: #4CAF50;
-}
-
-.btn-remove {
-    background-color: #E53935;
-}
-
-.hidden {
-    display: none;
-}
-
-/* --- Cantidad debajo del botón --- */
-.cantidad {
-    font-size: 0.8em;
-    color: #333;
-}
-
-.menu-item.selected {
-    background-color: #e8f5e9;
-    border: 2px solid #4CAF50;
-    transform: scale(1.02);
-    transition: all 0.2s ease;
-}
-
-.menu-item.in-cart {
-    background-color: #f1f8e9;
-    border: 2px solid #81C784;
-}
-
-.clientes-container {
-    padding: 20px;
-    text-align: center;
-  }
-  
-  .clientes-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 10px;
-  }
-  
-  .logo-right {
     width: 80px;
-    height: auto;
-  }
-  
-  .instrucciones {
-    font-weight: 600;
-    margin-bottom: 5px;
-  }
-  
-  .subtitulo {
-    color: #666;
-    margin-bottom: 15px;
-  }
-  
-  .clientes-list {
+    height: 80px;
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+/* ====== BOTONES + / - ====== */
+.plus-btn,
+.minus-btn {
+    width: 43px;
+    height: 43px;
+    font-size: 1.2rem;
+    border-radius: 50%;
+}
+
+/* ====== BARRA INFERIOR RESPONSIVE ====== */
+.bottom-bar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    max-width: 100%;
+    background: white;
+    box-shadow: 0 -4px 15px rgba(0,0,0,0.15);
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bottom-actions {
+    display: flex;
+    gap: 10px;
+}
+
+/* ====== MODAL ====== */
+.modal {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.45);
+}
+
+.modal-content {
+    background: white;
+    width: 95%;
+    max-width: 420px;
+    padding: 16px;
+    border-radius: 14px;
+}
+
+/* ====== CLIENTES EXTERNOS ====== */
+.clientes-list {
     display: flex;
     flex-direction: column;
-    gap: 15px;
-    margin-bottom: 25px;
-  }
-  
-  .cliente-card {
+    gap: 14px;
+}
+
+.cliente-card {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: white;
-    border-radius: 12px;
-    padding: 12px 16px;
+    background: white;
+    border-radius: 14px;
+    padding: 12px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    cursor: pointer;
-    transition: 0.2s;
-  }
-  
-  .cliente-card:hover {
-    background-color: #f5f5f5;
-  }
-  
-  .cliente-img {
-    width: 70px;
-    height: 70px;
-    border-radius: 8px;
+}
+
+.cliente-img {
+    width: 64px;
+    height: 64px;
+    border-radius: 10px;
     object-fit: cover;
-  }
-  
-  .nuevo-cliente {
-    border-top: 1px solid #ccc;
-    padding-top: 15px;
-  }
-  
-  .nuevo-cliente input {
-    margin: 0 10px;
-    padding: 6px 10px;
-    border-radius: 8px;
-    border: 1px solid #aaa;
-  }
+}
+
+/* ====== MEDIA QUERIES ====== */
+@media (min-width: 768px) {
+    .habitaciones-grid {
+        grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+    }
+
+    .menu-item {
+        padding: 16px;
+    }
+}
+
+/* ====== Notas para cocina ====== */
+.notas-cocina-container {
+    margin: 12px auto 18px;
+    text-align: left;
+    max-width: 420px;
+    width: 100%;
+}
+
+.notas-label {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 6px;
+    display: block;
+    font-size: 0.95rem;
+}
+
+#notas-cocina {
+    width: 100%;
+    min-height: 70px;
+    resize: none;
+    padding: 10px 12px;
+    border-radius: 12px;
+    border: 1px solid #ccc;
+    font-size: 0.95rem;
+    font-family: 'Segoe UI', sans-serif;
+    background: #fafafa;
+}
