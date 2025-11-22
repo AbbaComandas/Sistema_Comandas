@@ -88,6 +88,7 @@ def enviar_comanda(request, comanda_id):
     comanda = get_object_or_404(Comanda, id=comanda_id)
     data = json.loads(request.body.decode('utf-8') or '{}')
     items = data.get('items', [])
+    notas = data.get('notas_cocina', '')
 
     if items:
         comanda.items.all().delete()
@@ -110,6 +111,7 @@ def enviar_comanda(request, comanda_id):
                     ingredientes=it.get('ingredientes', ''),
                     imagen=it.get('imagen', '')
                 )
+    comanda.notas_cocina = notas
     comanda.estado = 'E'  # Enviada
     comanda.save()
     return JsonResponse({'ok': True, 'redirect': reverse('garzon:garzon_home')})
