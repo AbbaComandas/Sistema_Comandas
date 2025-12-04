@@ -47,7 +47,8 @@ def api_comandas_list(request):
             'confirmado_at': comanda.created_at.isoformat(),  # Para el timer
             'estado': 'PENDIENTE',  # Para compatibilidad
             'items': items_data,
-            'tiempo_transcurrido': f"{minutos}m {segundos}s"
+            'tiempo_transcurrido': f"{minutos}m {segundos}s",
+            'notas_cocina': comanda.notas_cocina if comanda.notas_cocina else ''
         })
     
     return JsonResponse({'ok': True, 'comandas': comandas_data})
@@ -82,22 +83,3 @@ def api_receive_comanda(request):
     API para recibir comandas (si usas comunicación entre apps)
     """
     return JsonResponse({'ok': True, 'message': 'Comanda recibida'})
-
-# Vistas no-API (para usar si prefieres no-AJAX)
-@login_required
-@require_POST
-def marcar_comanda_lista(request, comanda_id):
-    """Vista normal (no API) para marcar como lista"""
-    comanda = get_object_or_404(Comanda, id=comanda_id, estado='E')
-    comanda.estado = 'L'
-    comanda.save()
-    return redirect('cocina:home_cocina')
-
-@login_required
-@require_POST
-def anular_comanda(request, comanda_id):
-    """Vista normal (no API) para anular comanda"""
-    comanda = get_object_or_404(Comanda, id=comanda_id, estado='E')
-    comanda.estado = 'A'
-    comanda.save()
-    return redirect('cocina:home_cocina')
