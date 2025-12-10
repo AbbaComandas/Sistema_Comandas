@@ -16,6 +16,138 @@
     box-shadow: none !important;
     border-radius: 0 !important;
 }
+
+/* Estilos específicos para mejorar el layout de productos */
+.producto-item {
+    display: grid !important;
+    grid-template-columns: 25% 15% 20% 25% 15% !important;
+    align-items: center !important;
+    gap: 15px !important;
+    padding: 15px 20px !important;
+    border-bottom: 1px solid #eaeaea !important;
+}
+
+.producto-item:last-child {
+    border-bottom: none !important;
+}
+
+/* Ajustar los elementos internos */
+.producto-info {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+}
+
+.producto-info h4 {
+    margin: 0 !important;
+    padding: 0 !important;
+    font-size: 1.1em !important;
+    color: #2c3e50 !important;
+}
+
+.producto-info p {
+    display: none !important; /* Ocultar la descripción */
+}
+
+.precio-actual {
+    font-size: 1.2em !important;
+    font-weight: 600 !important;
+    color: #0b8a3e !important;
+    text-align: center !important;
+    padding: 5px 10px !important;
+    background-color: #f8f9fa !important;
+    border-radius: 6px !important;
+    min-width: 100px !important;
+}
+
+.form-precio {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    justify-content: flex-start !important;
+}
+
+.input-precio {
+    width: 120px !important;
+    padding: 8px 12px !important;
+    border: 2px solid #ddd !important;
+    border-radius: 6px !important;
+    font-size: 1em !important;
+    text-align: center !important;
+}
+
+.input-precio:focus {
+    border-color: #0b8a3e !important;
+    outline: none !important;
+}
+
+.form-control[placeholder="Razón del cambio"] {
+    width: 100% !important;
+    min-width: 200px !important;
+    padding: 8px 12px !important;
+    border: 2px solid #ddd !important;
+    border-radius: 6px !important;
+    font-size: 0.95em !important;
+}
+
+.form-control[placeholder="Razón del cambio"]:focus {
+    border-color: #0b8a3e !important;
+    outline: none !important;
+}
+
+.btn-gerencia {
+    padding: 8px 20px !important;
+    min-width: 100px !important;
+    white-space: nowrap !important;
+}
+
+/* Ajustar el header de categoría */
+.categoria-group h4 {
+    margin: 30px 0 20px 0 !important;
+    padding-bottom: 10px !important;
+    border-bottom: 2px solid #0b8a3e !important;
+    color: #2c3e50 !important;
+    font-size: 1.3em !important;
+}
+
+/* Cabecera de la lista de productos */
+.header-lista {
+    display: grid !important;
+    grid-template-columns: 25% 15% 20% 25% 15% !important;
+    gap: 15px !important;
+    padding: 12px 20px !important;
+    background-color: #f8f9fa !important;
+    border-radius: 8px 8px 0 0 !important;
+    font-weight: 600 !important;
+    color: #2c3e50 !important;
+    margin-top: 20px !important;
+    border-bottom: 2px solid #ddd !important;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .producto-item {
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+        padding: 20px !important;
+        border: 1px solid #eaeaea !important;
+        border-radius: 8px !important;
+        margin-bottom: 15px !important;
+    }
+    
+    .header-lista {
+        display: none !important;
+    }
+    
+    .form-precio {
+        flex-wrap: wrap !important;
+        justify-content: flex-start !important;
+    }
+    
+    .form-control[placeholder="Razón del cambio"] {
+        min-width: 100% !important;
+    }
+}
 </style>
 
 <div class="panel-gerencia">
@@ -55,24 +187,36 @@
         <!-- Lista de productos -->
         <div class="grid-card">
             <h3>Lista de Productos</h3>
+            
+            <!-- Cabecera de columnas -->
+            <div class="header-lista">
+                <div>Producto</div>
+                <div>Precio Actual</div>
+                <div>Nuevo Precio</div>
+                <div>Razón del Cambio</div>
+                <div>Acción</div>
+            </div>
+            
             <div class="lista-productos">
                 {% for categoria in categorias %}
                 <div class="categoria-group" data-categoria="categoria-{{ categoria.id }}">
-                    <h4 style="color: #2c3e50; border-bottom: 2px solid #0b8a3e; padding-bottom: 8px; margin: 25px 0 15px 0;">
-                        {{ categoria.nombre }}
-                    </h4>
+                    <h4>{{ categoria.nombre }}</h4>
                     
                     {% for producto in categoria.productos.all %}
                     <div class="producto-item" data-nombre="{{ producto.nombre|lower }}">
+                        <!-- Nombre del producto -->
                         <div class="producto-info">
                             <h4>{{ producto.nombre }}</h4>
-                            <p>{{ producto.descripcion|default:"Sin descripción" }}</p>
+                            <!-- La descripción está oculta por CSS -->
+                            <p style="display: none;">{{ producto.descripcion|default:"Sin descripción" }}</p>
                         </div>
                         
+                        <!-- Precio actual -->
                         <div class="precio-actual" id="precio-actual-{{ producto.id }}">
                             ${{ producto.precio }}
                         </div>
                         
+                        <!-- Formulario para cambiar precio -->
                         <div class="form-precio">
                             <input type="number" 
                                    id="nuevo-precio-{{ producto.id }}" 
@@ -83,13 +227,18 @@
                                    pattern="[0-9]*"
                                    inputmode="numeric"
                                    value="{{ producto.precio }}">
-                            
+                        </div>
+                        
+                        <!-- Razón del cambio -->
+                        <div class="form-precio">
                             <input type="text" 
                                    id="razon-{{ producto.id }}" 
                                    class="form-control" 
-                                   placeholder="Razón del cambio"
-                                   style="width: 200px;">
-                            
+                                   placeholder="Razón del cambio">
+                        </div>
+                        
+                        <!-- Botón de acción -->
+                        <div>
                             <button class="btn-gerencia" 
                                     onclick="actualizarPrecio({{ producto.id }})">
                                 Actualizar
@@ -131,7 +280,7 @@ document.getElementById('buscar-producto').addEventListener('input', function() 
     productos.forEach(producto => {
         const nombre = producto.dataset.nombre;
         if (nombre.includes(busqueda)) {
-            producto.style.display = 'flex';
+            producto.style.display = 'grid';
         } else {
             producto.style.display = 'none';
         }

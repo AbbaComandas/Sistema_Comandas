@@ -13,6 +13,60 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'garzon/css/garzon.css' %}">
 
+<style>
+/* Agregar separación entre botones del modal */
+.modal-actions {
+    display: flex !important;
+    gap: 15px !important; 
+    margin-top: 20px !important;
+    justify-content: center !important;
+}
+
+.modal-actions button {
+    flex: 1 !important; 
+    min-width: 120px !important; 
+    padding: 12px 20px !important;
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    border: none !important;
+    border-radius: 8px !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+}
+
+/* Botón Confirmar */
+#confirm-send.btn-accion {
+    background-color: #0b8a3e !important;
+    color: white !important;
+}
+
+#confirm-send.btn-accion:hover {
+    background-color: #0a7a36 !important;
+    transform: translateY(-2px) !important;
+}
+
+/* Botón Cancelar */
+#cancel-send.btn-logout {
+    background-color: #f71212ff !important;
+    color: white !important;
+}
+
+#cancel-send.btn-logout:hover {
+    background-color: #f60000ff !important;
+    transform: translateY(-2px) !important;
+}
+@media (max-width: 480px) {
+    .modal-actions {
+        flex-direction: column !important;
+        gap: 10px !important;
+    }
+    
+    .modal-actions button {
+        width: 100% !important;
+    }
+}
+</style>
+
 <div class="comanda-container">
     <div class="comanda-header">
         <a href="{% url 'garzon:garzon_home' %}" class="back-arrow">←</a>

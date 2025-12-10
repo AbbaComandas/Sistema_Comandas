@@ -107,6 +107,8 @@
     box-sizing: border-box !important;
     min-height: 280px !important;
     width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
 }
 
 /* En layout horizontal, las tarjetas tienen ancho fijo */
@@ -118,6 +120,150 @@
         max-width: 350px !important;
         margin: 0 10px !important; /* Espacio entre tarjetas centradas */
     }
+}
+
+/* Estilos para las notas de cocina */
+.notas-cocina {
+    margin: 10px 0 15px 0 !important;
+    padding: 10px 12px !important;
+    background-color: #fff3cd !important;
+    border-left: 4px solid #ffc107 !important;
+    border-radius: 4px !important;
+    font-size: 0.9em !important;
+    color: #856404 !important;
+    font-style: italic !important;
+    line-height: 1.4 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+.notas-cocina strong {
+    color: #856404 !important;
+    font-style: normal !important;
+    margin-right: 5px !important;
+}
+
+/* Para cuando no hay notas */
+.notas-cocina:empty {
+    display: none !important;
+}
+
+/* Habitación */
+.habitacion {
+    margin-top: 10px !important;
+    margin-bottom: 15px !important;
+    padding: 8px 12px !important;
+    background-color: #e9ecef !important;
+    border-radius: 4px !important;
+    font-weight: 600 !important;
+    color: #495057 !important;
+    font-size: 0.95em !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+/* Botones - posicionados al final de la tarjeta */
+.card-actions {
+    margin-top: auto !important;
+    display: flex !important;
+    gap: 10px !important;
+    padding-top: 10px !important;
+    border-top: 1px solid #eaeaea !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+/* Items list */
+.items-list {
+    margin: 15px 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+.item-row {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 8px 0 !important;
+    border-bottom: 1px solid #f1f1f1 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+.item-row:last-child {
+    border-bottom: none !important;
+}
+
+/* Estado LISTO */
+.estado-listo {
+    background-color: #28a745 !important;
+    color: white !important;
+    padding: 5px 10px !important;
+    border-radius: 4px !important;
+    font-weight: bold !important;
+    font-size: 0.9em !important;
+    margin: 10px 0 !important;
+    text-align: center !important;
+    width: fit-content !important;
+}
+
+/* Cabecera de comanda */
+.comanda-header {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    margin-bottom: 10px !important;
+    padding-bottom: 10px !important;
+    border-bottom: 2px solid #eaeaea !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+.num-orden {
+    font-weight: bold !important;
+    font-size: 1.2em !important;
+    color: #2c3e50 !important;
+}
+
+.timer {
+    font-size: 0.9em !important;
+    color: #666 !important;
+    background-color: #f8f9fa !important;
+    padding: 3px 8px !important;
+    border-radius: 4px !important;
+}
+
+/* Botones */
+.btn-correcto {
+    flex: 1 !important;
+    background-color: #28a745 !important;
+    color: white !important;
+    border: none !important;
+    padding: 10px !important;
+    border-radius: 6px !important;
+    font-weight: bold !important;
+    cursor: pointer !important;
+    transition: background-color 0.3s !important;
+}
+
+.btn-correcto:hover {
+    background-color: #218838 !important;
+}
+
+.btn-eliminar {
+    flex: 1 !important;
+    background-color: #dc3545 !important;
+    color: white !important;
+    border: none !important;
+    padding: 10px !important;
+    border-radius: 6px !important;
+    font-weight: bold !important;
+    cursor: pointer !important;
+    transition: background-color 0.3s !important;
+}
+
+.btn-eliminar:hover {
+    background-color: #c82333 !important;
 }
 
 /* Centrado adicional para cuando hay pocas tarjetas */
@@ -250,6 +396,14 @@ function createCard(c) {
         itemsDiv.appendChild(row);
     });
     div.appendChild(itemsDiv);
+
+    // NOTAS DE COCINA - AGREGADAS AQUÍ
+    if (c.notas_cocina && c.notas_cocina.trim() !== '') {
+        const notasDiv = document.createElement('div');
+        notasDiv.className = 'notas-cocina';
+        notasDiv.innerHTML = `<strong>Notas:</strong> ${c.notas_cocina}`;
+        div.appendChild(notasDiv);
+    }
 
     // Habitación
     const hab = document.createElement('div');
